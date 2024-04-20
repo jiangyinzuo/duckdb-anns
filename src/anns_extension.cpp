@@ -42,6 +42,7 @@ inline void AnnsOpenSSLVersionScalarFun(DataChunk &args, ExpressionState &state,
 }
 
 inline void AnnsFunction(ClientContext &context, TableFunctionInput &data, DataChunk &output) {
+
 }
 
 static void LoadInternal(DatabaseInstance &instance) {

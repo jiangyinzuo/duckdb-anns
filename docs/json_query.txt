@@ -1,0 +1,107 @@
+root@iZj6c0zgj345fc1ifm2413Z:~/duckdb-anns/build/debug# ./duckdb
+
+v..1-dev 4a89d97
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+D
+D LOAD json;
+D explain select * FROM 'todos.json';
+IO Error: No files found that match the pattern "todos.json"
+D explain select * FROM 'compile_commands.json';
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│      READ_JSON_AUTO       │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         directory         │
+│          command          │
+│            file           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│          EC: 484          │
+└───────────────────────────┘
+D explain select 43;
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             43            │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         DUMMY_SCAN        │
+└───────────────────────────┘
+D .q
+
+
+----
+
+
+root@iZj6c0zgj345fc1ifm2413Z:~/duckdb-anns/build/debug# ./duckdb
+v..1-dev 4a89d97
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+D SET explain_output = 'all';
+D load json;
+D se
+
+D explain select * FROM 'todos.json';
+IO Error: No files found that match the pattern "todos.json"
+D explain select * FROM 'compile_commands.json';
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││ Unoptimized Logical Plan  ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         directory         │
+│          command          │
+│            file           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       READ_JSON_AUTO      │
+└───────────────────────────┘
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││  Optimized Logical Plan   ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         directory         │
+│          command          │
+│            file           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       READ_JSON_AUTO      │
+└───────────────────────────┘
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│      READ_JSON_AUTO       │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         directory         │
+│          command          │
+│            file           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│          EC: 484          │
+└───────────────────────────┘
+D
