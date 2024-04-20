@@ -1,0 +1,23 @@
+# name: test/sql/anns.test
+# description: test anns extension
+# group: [anns]
+
+# Before we load the extension, this will fail
+statement error
+SELECT anns('Sam');
+----
+Catalog Error: Scalar Function with name anns does not exist!
+
+# Require statement will ensure this test is run with this extension loaded
+require anns
+
+# Confirm the extension works
+query I
+SELECT anns('Sam');
+----
+Anns Sam 🐥
+
+query I
+SELECT anns_openssl_version('Michael');
+----
+<REGEX>:Anns Michael, my linked OpenSSL version is OpenSSL.*
