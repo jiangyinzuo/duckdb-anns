@@ -143,6 +143,8 @@ public:
 duckdb/src/main/database.cpp:190
 ```cpp
 void DatabaseInstance::Initialize(const char *database_path, DBConfig *user_config) {
+```
 duckdb/src/main/database.cpp:225
+```cpp
 	buffer_manager = make_uniq<StandardBufferManager>(*this, config.options.temporary_directory);
 ```
