@@ -2,7 +2,7 @@
 
 ## Table Scan TableFunction
 
-duckdb/src/function/table/table_scan.cpp:119
+duckdb/src/function/table/table_scan.cpp:119-146 submodule=duckdb version=v0.10.1 snippet_id=37
 ```cpp
 static void TableScanFunc(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
 	auto &bind_data = data_p.bind_data->Cast<TableScanBindData>();
@@ -35,7 +35,7 @@ static void TableScanFunc(ClientContext &context, TableFunctionInput &data_p, Da
 ```
 ### Local State和Global State
 
-duckdb/src/function/table/table_scan.cpp:30
+duckdb/src/function/table/table_scan.cpp:30-35 submodule=duckdb version=v0.10.1 snippet_id=38
 ```cpp
 struct TableScanLocalState : public LocalTableFunctionState {
 	//! The current position in the scan
@@ -45,7 +45,7 @@ struct TableScanLocalState : public LocalTableFunctionState {
 };
 ```
 
-duckdb/src/function/table/table_scan.cpp:45
+duckdb/src/function/table/table_scan.cpp:45-65 submodule=duckdb version=v0.10.1 snippet_id=39
 ```cpp
 struct TableScanGlobalState : public GlobalTableFunctionState {
 	TableScanGlobalState(ClientContext &context, const FunctionData *bind_data_p) {

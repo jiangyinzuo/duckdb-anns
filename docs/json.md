@@ -4,7 +4,7 @@
 
 需要注册JSON类型、自定义函数
 
-duckdb/extension/json/json_extension.cpp:26
+duckdb/extension/json/json_extension.cpp:26-65 submodule=duckdb version=v0.10.1 snippet_id=13
 ```cpp
 void JsonExtension::Load(DuckDB &db) {
 	auto &db_instance = *db.instance;
@@ -52,7 +52,7 @@ void JsonExtension::Load(DuckDB &db) {
 
 这段代码不在插件中。JSON类型是VARCHAR类型的别名
 
-duckdb/src/common/types.cpp:1445
+duckdb/src/common/types.cpp:1445-1452 submodule=duckdb version=v0.10.1 snippet_id=14
 ```cpp
 //===--------------------------------------------------------------------===//
 // JSON Type
@@ -68,7 +68,7 @@ LogicalType LogicalType::JSON() {
 
 3个参数中，`context`没有用上
 
-duckdb/extension/json/json_functions/read_json.cpp:273
+duckdb/extension/json/json_functions/read_json.cpp:273-275 submodule=duckdb version=v0.10.1 snippet_id=15
 ```cpp
 static void ReadJSONFunction(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
 	auto &gstate = data_p.global_state->Cast<JSONGlobalTableFunctionState>().state;
@@ -107,7 +107,7 @@ static void ReadJSONFunction(ClientContext &context, TableFunctionInput &data_p,
 
 把`output` DataChunk中的数据转换成JSON格式
 
-duckdb/extension/json/json_functions/read_json.cpp:281
+duckdb/extension/json/json_functions/read_json.cpp:281-297 submodule=duckdb version=v0.10.1 snippet_id=16
 ```cpp
 	if (!gstate.names.empty()) {
 		vector<Vector *> result_vectors;
@@ -138,7 +138,7 @@ duckdb/extension/json/json_functions/read_json.cpp:281
 - 全局变量状态 JSONGlobalTableFunctionState::Init
 - 局部变量状态 JSONLocalTableFunctionState::Init
 
-duckdb/extension/json/json_functions/read_json_objects.cpp:51
+duckdb/extension/json/json_functions/read_json_objects.cpp:51-59 submodule=duckdb version=v0.10.1 snippet_id=17
 ```cpp
 TableFunction GetReadJSONObjectsTableFunction(bool list_parameter, shared_ptr<JSONScanInfo> function_info) {
 	auto parameter = list_parameter ? LogicalType::LIST(LogicalType::VARCHAR) : LogicalType::VARCHAR;
@@ -156,12 +156,12 @@ TableFunction GetReadJSONObjectsTableFunction(bool list_parameter, shared_ptr<JS
 
 这个类保存了一些函数参数
 
-duckdb/extension/json/include/json_scan.hpp:84
+duckdb/extension/json/include/json_scan.hpp:84-84 submodule=duckdb version=v0.10.1 snippet_id=18
 ```cpp
 struct JSONScanData : public TableFunctionData {
 ```
 
-duckdb/extension/json/include/json_scan.hpp:98
+duckdb/extension/json/include/json_scan.hpp:98-113 submodule=duckdb version=v0.10.1 snippet_id=19
 ```cpp
 public:
 	//! Scan type
@@ -184,7 +184,7 @@ public:
 
 在`Bind`中被设置
 
-duckdb/extension/json/json_scan.cpp:24
+duckdb/extension/json/json_scan.cpp:24-31 submodule=duckdb version=v0.10.1 snippet_id=20
 ```cpp
 void JSONScanData::Bind(ClientContext &context, TableFunctionBindInput &input) {
 	auto &info = input.info->Cast<JSONScanInfo>();
@@ -198,7 +198,7 @@ void JSONScanData::Bind(ClientContext &context, TableFunctionBindInput &input) {
 
 这个结构体应该记录了用户SQL中传递的参数
 
-duckdb/src/include/duckdb/function/table_function.hpp:83
+duckdb/src/include/duckdb/function/table_function.hpp:83-96 submodule=duckdb version=v0.10.1 snippet_id=21
 ```cpp
 struct TableFunctionBindInput {
 	TableFunctionBindInput(vector<Value> &inputs, named_parameter_map_t &named_parameters,
@@ -220,7 +220,7 @@ struct TableFunctionBindInput {
 
 在这里
 
-duckdb/extension/json/json_functions/read_json_objects.cpp:7
+duckdb/extension/json/json_functions/read_json_objects.cpp:7-20 submodule=duckdb version=v0.10.1 snippet_id=22
 ```cpp
 unique_ptr<FunctionData> ReadJSONObjectsBind(ClientContext &context, TableFunctionBindInput &input,
                                              vector<LogicalType> &return_types, vector<string> &names) {
@@ -243,7 +243,7 @@ unique_ptr<FunctionData> ReadJSONObjectsBind(ClientContext &context, TableFuncti
 GlobalState代表多线程并行执行一个TableFunction时，需要用到的状态变量。
 LocalState是单线程内的状态变量
 
-duckdb/extension/json/include/json_scan.hpp:274
+duckdb/extension/json/include/json_scan.hpp:274-293 submodule=duckdb version=v0.10.1 snippet_id=23
 ```cpp
 struct JSONGlobalTableFunctionState : public GlobalTableFunctionState {
 public:
@@ -269,7 +269,7 @@ public:
 
 ### GlobalState
 
-duckdb/extension/json/json_scan.cpp:215
+duckdb/extension/json/json_scan.cpp:215-235 submodule=duckdb version=v0.10.1 snippet_id=24
 ```cpp
 idx_t JSONGlobalTableFunctionState::MaxThreads() const {
 	auto &bind_data = state.bind_data;
@@ -296,7 +296,7 @@ idx_t JSONGlobalTableFunctionState::MaxThreads() const {
 
 ### LocalState
 
-duckdb/extension/json/json_scan.cpp:241
+duckdb/extension/json/json_scan.cpp:241-243 submodule=duckdb version=v0.10.1 snippet_id=25
 ```cpp
 unique_ptr<LocalTableFunctionState> JSONLocalTableFunctionState::Init(ExecutionContext &context,
                                                                       TableFunctionInitInput &,

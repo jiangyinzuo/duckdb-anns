@@ -6,7 +6,7 @@
 
 （通过搜索fsync找到）
 
-duckdb/src/include/duckdb/common/local_file_system.hpp:16
+duckdb/src/include/duckdb/common/local_file_system.hpp:16-33 submodule=duckdb version=v0.10.1 snippet_id=29
 ```cpp
 class LocalFileSystem : public FileSystem {
 public:
@@ -30,7 +30,7 @@ public:
 
 **VirtualFileSystem**
 
-duckdb/src/include/duckdb/common/virtual_file_system.hpp:17
+duckdb/src/include/duckdb/common/virtual_file_system.hpp:17-26 submodule=duckdb version=v0.10.1 snippet_id=30
 ```cpp
 // bunch of wrappers to allow registering protocol handlers
 class VirtualFileSystem : public FileSystem {
@@ -48,7 +48,7 @@ public:
 
 文件系统层被FileHandle调用
 
-duckdb/src/common/file_system.cpp:484
+duckdb/src/common/file_system.cpp:484-486 submodule=duckdb version=v0.10.1 snippet_id=31
 ```cpp
 void FileHandle::Read(void *buffer, idx_t nr_bytes, idx_t location) {
 	file_system.Read(*this, buffer, nr_bytes, location);
@@ -76,7 +76,7 @@ duckdb/test/sql/storage/wal_torn_write.cpp|68 col 10| handle->Read(wal_contents.
 
 ## FileBuffer
 
-duckdb/src/common/file_buffer.cpp:86
+duckdb/src/common/file_buffer.cpp:86-89 submodule=duckdb version=v0.10.1 snippet_id=32
 ```cpp
 void FileBuffer::Read(FileHandle &handle, uint64_t location) {
 	D_ASSERT(type != FileBufferType::TINY_BUFFER);
@@ -86,7 +86,7 @@ void FileBuffer::Read(FileHandle &handle, uint64_t location) {
 
 ## SingleFileBlockManager
 
-duckdb/src/storage/single_file_block_manager.cpp:257
+duckdb/src/storage/single_file_block_manager.cpp:257-270 submodule=duckdb version=v0.10.1 snippet_id=33
 ```cpp
 void SingleFileBlockManager::ReadAndChecksum(FileBuffer &block, uint64_t location) const {
 	// read the buffer from disk
@@ -106,7 +106,7 @@ void SingleFileBlockManager::ReadAndChecksum(FileBuffer &block, uint64_t locatio
 
 加载现有数据库
 
-duckdb/src/storage/single_file_block_manager.cpp:223
+duckdb/src/storage/single_file_block_manager.cpp:223-235 submodule=duckdb version=v0.10.1 snippet_id=34
 ```cpp
 void SingleFileBlockManager::LoadExistingDatabase() {
 	uint8_t flags;
@@ -123,7 +123,7 @@ void SingleFileBlockManager::LoadExistingDatabase() {
 	DeserializeHeaderStructure<MainHeader>(header_buffer.buffer);
 ```
 
-duckdb/src/storage/single_file_block_manager.cpp:407
+duckdb/src/storage/single_file_block_manager.cpp:407-411 submodule=duckdb version=v0.10.1 snippet_id=35
 ```cpp
 void SingleFileBlockManager::Read(Block &block) {
 	D_ASSERT(block.id >= 0);
@@ -134,7 +134,7 @@ void SingleFileBlockManager::Read(Block &block) {
 
 BufferHandle
 
-duckdb/src/storage/buffer/block_handle.cpp:72
+duckdb/src/storage/buffer/block_handle.cpp:72-94 submodule=duckdb version=v0.10.1 snippet_id=36
 ```cpp
 BufferHandle BlockHandle::Load(shared_ptr<BlockHandle> &handle, unique_ptr<FileBuffer> reusable_buffer) {
 	if (handle->state == BlockState::BLOCK_LOADED) {

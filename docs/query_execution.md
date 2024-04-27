@@ -2,7 +2,7 @@
 
 ## Physical Operator
 
-duckdb/src/include/duckdb/execution/physical_operator.hpp:30
+duckdb/src/include/duckdb/execution/physical_operator.hpp:30-32 submodule=duckdb version=v0.10.1 snippet_id=5
 ```cpp
 //! PhysicalOperator is the base class of the physical operators present in the
 //! execution plan
@@ -71,7 +71,7 @@ duckdb/src/include/duckdb/execution/operator/set/physical_union.hpp|15 col 7| cl
 duckdb/src/include/duckdb/execution/physical_operator.hpp|221 col 7| class CachingPhysicalOperator : public PhysicalOperator {
 ```
 
-duckdb/src/include/duckdb/common/enums/physical_operator_type.hpp:18
+duckdb/src/include/duckdb/common/enums/physical_operator_type.hpp:18-121 submodule=duckdb version=v0.10.1 snippet_id=6
 ```cpp
 enum class PhysicalOperatorType : uint8_t {
 	INVALID,
@@ -181,7 +181,7 @@ enum class PhysicalOperatorType : uint8_t {
 
 ## Sink
 
-duckdb/src/include/duckdb/execution/physical_operator.hpp:133
+duckdb/src/include/duckdb/execution/physical_operator.hpp:133-153 submodule=duckdb version=v0.10.1 snippet_id=7
 ```cpp
 	// Sink interface
 
@@ -205,7 +205,7 @@ duckdb/src/include/duckdb/execution/physical_operator.hpp:133
 	virtual unique_ptr<LocalSinkState> GetLocalSinkState(ExecutionContext &context) const;
 	virtual unique_ptr<GlobalSinkState> GetGlobalSinkState(ClientContext &context) const;
 ```
-duckdb/src/include/duckdb/execution/physical_operator.hpp:161
+duckdb/src/include/duckdb/execution/physical_operator.hpp:161-171 submodule=duckdb version=v0.10.1 snippet_id=8
 ```cpp
 	virtual bool IsSink() const {
 		return false;
@@ -224,11 +224,11 @@ duckdb/src/include/duckdb/execution/physical_operator.hpp:161
 
 Block操作，需要如蓄水池般积蓄所有数据后才能执行
 
-duckdb/src/include/duckdb/execution/operator/aggregate/physical_hash_aggregate.hpp:60
+duckdb/src/include/duckdb/execution/operator/aggregate/physical_hash_aggregate.hpp:60-60 submodule=duckdb version=v0.10.1 snippet_id=9
 ```cpp
 class PhysicalHashAggregate : public PhysicalOperator {
 ```
-duckdb/src/include/duckdb/execution/operator/aggregate/physical_hash_aggregate.hpp:121
+duckdb/src/include/duckdb/execution/operator/aggregate/physical_hash_aggregate.hpp:121-127 submodule=duckdb version=v0.10.1 snippet_id=10
 ```cpp
 	bool IsSink() const override {
 		return true;
@@ -284,7 +284,7 @@ duckdb/src/parallel/pipeline_executor.cpp|41 col 24| if (current_operator.IsSink
 
 会在`PhysicalPlanGenerator::CreatePlan`的时候创建
 
-duckdb/src/execution/physical_plan/plan_get.cpp:32
+duckdb/src/execution/physical_plan/plan_get.cpp:32-98 submodule=duckdb version=v0.10.1 snippet_id=11
 ```cpp
 unique_ptr<PhysicalOperator> PhysicalPlanGenerator::CreatePlan(LogicalGet &op) {
 	if (!op.children.empty()) {
@@ -357,7 +357,7 @@ unique_ptr<PhysicalOperator> PhysicalPlanGenerator::CreatePlan(LogicalGet &op) {
 
 ## Physical Plan
 
-duckdb/src/include/duckdb/execution/physical_plan_generator.hpp:50
+duckdb/src/include/duckdb/execution/physical_plan_generator.hpp:50-94 submodule=duckdb version=v0.10.1 snippet_id=12
 ```cpp
 protected:
 	unique_ptr<PhysicalOperator> CreatePlan(LogicalOperator &op);

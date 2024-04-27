@@ -7,7 +7,7 @@ It holds a set of vectors that all have the same length.
 
 用一个duckdb::vector保存
 
-duckdb/src/include/duckdb/common/types/data_chunk.hpp:43
+duckdb/src/include/duckdb/common/types/data_chunk.hpp:43-50 submodule=duckdb version=v0.10.1 snippet_id=26
 ```cpp
 class DataChunk {
 public:
@@ -19,7 +19,7 @@ public:
 	vector<Vector> data;
 ```
 
-duckdb/src/include/duckdb/common/types/vector.hpp:66
+duckdb/src/include/duckdb/common/types/vector.hpp:66-80 submodule=duckdb version=v0.10.1 snippet_id=27
 ```cpp
 //!  Vector of values of a specified PhysicalType.
 class Vector {
@@ -37,7 +37,7 @@ class Vector {
 	friend class DataChunk;
 	friend class VectorCacheBuffer;
 ```
-duckdb/src/include/duckdb/common/types/vector.hpp:227
+duckdb/src/include/duckdb/common/types/vector.hpp:227-241 submodule=duckdb version=v0.10.1 snippet_id=28
 ```cpp
 protected:
 	//! The vector type specifies how the data of the vector is physically stored (i.e. if it is a single repeated

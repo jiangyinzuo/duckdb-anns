@@ -2,7 +2,7 @@
 
 接文件系统
 
-duckdb/src/storage/standard_buffer_manager.cpp:153
+duckdb/src/storage/standard_buffer_manager.cpp:153-165 submodule=duckdb version=v0.10.1 snippet_id=1
 ```cpp
 BufferHandle StandardBufferManager::Pin(shared_ptr<BlockHandle> &handle) {
 	idx_t required_memory;
@@ -115,7 +115,7 @@ duckdb/test/sql/storage/test_buffer_manager.cpp|289 col 29| auto pin = buffer_ma
 
 `BufferManager`是个虚基类。只有`StandardBufferManager`一个子类。
 
-duckdb/src/include/duckdb/storage/buffer_manager.hpp:25
+duckdb/src/include/duckdb/storage/buffer_manager.hpp:25-43 submodule=duckdb version=v0.10.1 snippet_id=2
 ```cpp
 class BufferManager {
 	friend class BufferHandle;
@@ -140,11 +140,11 @@ public:
 
 在这里创建。
 
-duckdb/src/main/database.cpp:190
+duckdb/src/main/database.cpp:190-190 submodule=duckdb version=v0.10.1 snippet_id=3
 ```cpp
 void DatabaseInstance::Initialize(const char *database_path, DBConfig *user_config) {
 ```
-duckdb/src/main/database.cpp:225
+duckdb/src/main/database.cpp:225-225 submodule=duckdb version=v0.10.1 snippet_id=4
 ```cpp
 	buffer_manager = make_uniq<StandardBufferManager>(*this, config.options.temporary_directory);
 ```
