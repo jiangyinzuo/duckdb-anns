@@ -1,3 +1,0 @@
-let l:bm_file_version = 1
-let l:bm_sessions = {'default': {'/root/duckdb-anns/duckdb/extension/json/json_extension.cpp': [{'sign_idx': 9500, 'line_nr': 44, 'content': '		ExtensionUtil::RegisterFunction(db_instance, fun);', 'annotation': '注册JSON table functions'},],'/root/duckdb-anns/duckdb/extension/json/json_functions.cpp': [{'sign_idx': 9501, 'line_nr': 174, 'content': 'vector<TableFunctionSet> JSONFunctions::GetTableFunctions() {', 'annotation': '添加JSON table function'},],}}
-let l:bm_current_session = 'default'
